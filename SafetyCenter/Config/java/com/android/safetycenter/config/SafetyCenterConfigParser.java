@@ -360,7 +360,7 @@ public final class SafetyCenterConfigParser {
                     break;
                 case ATTR_SAFETY_SOURCE_USER:
                     builder.setUser(parseUser(parser.getAttributeValue(i),
-                            name, parser.getAttributeName(i), resources));
+                            name, parser.getAttributeName(i), resources, packageNameOverride));
                     break;
                 case ATTR_SAFETY_SOURCE_PROFILE:
                     builder.setProfile(
@@ -662,9 +662,10 @@ public final class SafetyCenterConfigParser {
     }
 
     private static int parseUser(
-            String valueString, String parent, String name, Resources resources)
+            String valueString, String parent, String name, Resources resources,
+            @Nullable String packageNameOverride)
             throws ParseException {
-        String valueToParse = getValueToParse(valueString, parent, name, resources);
+        String valueToParse = getValueToParse(valueString, parent, name, resources, packageNameOverride);
         switch (valueToParse) {
             case ENUM_USER_PRIMARY:
                 return SafetySource.USER_PRIMARY;
